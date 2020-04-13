@@ -25,6 +25,23 @@ function love.load()
         resizable = false,
         highdpi = true
     })
+
+    local room1 = room:new()
+    local grandma = character:new({
+        x = VIRTUAL_WIDTH - 30,
+        y = VIRTUAL_HEIGHT - 30,
+        name = "Granny",
+        spriteRow = 1})
+    
+    local player = character:new({
+        x = 10,
+        y = 10,
+        name = "Boy",
+        spriteRow = 2,
+    })
+
+
+    world.entities = {room1, player, grandma}
 end
 
 function love.keypressed(k)
@@ -40,10 +57,10 @@ function love.draw()
   
 
     love.graphics.clear(119/255, 136/255, 153/255)
-  
-    player:render()
 
-    -- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+    world:render()
   
+    -- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+
     push:finish()
 end
