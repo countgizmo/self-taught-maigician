@@ -27,6 +27,14 @@ function love.load()
     })
 end
 
+function love.keypressed(k)
+    if k == 'escape' then
+       love.event.quit()
+    elseif k == 'f' then
+        push:switchFullscreen(WINDOW_WIDTH, WINDOW_HEIGHT)
+    end
+ end
+
 function love.draw()
     push:start()
   
