@@ -8,7 +8,9 @@ local character = {
     currentFrame = 1,
     spriteSheet = love.graphics.newImage('resources/img/dummy-top-down.png'),
     render = rendering.render,
-    quads = {}
+    quads = {},
+    state = 'idle',
+    input = input
 }
 
 function character:new(o)

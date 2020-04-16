@@ -8,6 +8,9 @@ local rendering = {
             object.quads[object.currentFrame],
             object.x,
             object.y)
+        
+            -- debug
+            love.graphics.print(object.state, object.x, object.y + object.height)
     end
 }
 

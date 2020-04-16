@@ -1,6 +1,9 @@
 push = require('lib/push')
-rendering = require('src/components/rendering')
 utils = require('src/utils')
+
+-- Components
+rendering = require('src/components/rendering')
+input = require('src/components/input')
 
 -- Entities
 room = require('src/entities/room')

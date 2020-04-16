@@ -14,6 +14,9 @@ WINDOW_HEIGHT = WINDOW_HEIGHT * 0.8
 VIRTUAL_WIDTH = 384
 VIRTUAL_HEIGHT = 216
 
+gSmallFont = love.graphics.newFont('resources/fonts/font.ttf', 8)
+love.graphics.setFont(gSmallFont)
+
 -- Dependencies
 require('deps')
 
@@ -26,7 +29,7 @@ function love.load()
         highdpi = true
     })
 
-    local room1 = room:new()
+    local room1 = room:new({name = "room"})
     local grandma = character:new({
         x = VIRTUAL_WIDTH - 30,
         y = VIRTUAL_HEIGHT - 30,
@@ -38,6 +41,8 @@ function love.load()
         y = 10,
         name = "Boy",
         spriteRow = 2,
+        inputs = { keyPress = { right = 'moveRight', left = 'moveLeft'},
+                   keyRelease = { right = 'idle', left = 'idle'}}
     })
 
 
@@ -50,12 +55,17 @@ function love.keypressed(k)
     elseif k == 'f' then
         push:switchFullscreen(WINDOW_WIDTH, WINDOW_HEIGHT)
     end
+
+    world:keypressed(k)
+ end
+
+ function love.keyreleased(k)
+    world:keyreleased(k)
  end
 
 function love.draw()
     push:start()
   
-
     love.graphics.clear(119/255, 136/255, 153/255)
 
     world:render()
