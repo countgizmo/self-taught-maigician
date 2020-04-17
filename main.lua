@@ -33,16 +33,29 @@ function love.load()
     local grandma = character:new({
         x = VIRTUAL_WIDTH - 30,
         y = VIRTUAL_HEIGHT - 30,
+        stateStack = {'idle'},
         name = "Granny",
         spriteRow = 1})
     
     local player = character:new({
         x = 10,
         y = 10,
+        stateStack = {'idle'},
+        stateTransitions = {
+            idle = { moveRight = { velocityX = 15 },
+                     moveLeft = { velocityX = -15 },
+                     moveUp = { velocityY = -15 },
+                     moveDown = { velocityY = 15 }},
+            moveRight = { idle = { velocityX = 0 }},
+            moveLeft = { idle = { velocityX = 0 }},
+            moveUp = { idle = {velocityY = 0 }},
+            moveDown = { idle = {velocityY = 0 }}
+        },
         name = "Boy",
         spriteRow = 2,
-        inputs = { keyPress = { right = 'moveRight', left = 'moveLeft'},
-                   keyRelease = { right = 'idle', left = 'idle'}}
+        inputs = { keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'},
+                   keyRelease = { right = 'idle', left = 'idle', up ='idle', down = 'idle'}
+                  }
     })
 
 
@@ -63,13 +76,17 @@ function love.keypressed(k)
     world:keyreleased(k)
  end
 
+function love.update(dt)
+    movement.move(world.entities, dt)
+end
+
 function love.draw()
     push:start()
   
     love.graphics.clear(119/255, 136/255, 153/255)
 
-    world:render()
-  
+    rendering.renderall(world.entities)
+    
     -- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
     push:finish()
