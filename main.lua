@@ -31,15 +31,15 @@ function love.load()
 
     local room1 = room:new({name = "room"})
     local grandma = character:new({
-        x = VIRTUAL_WIDTH - 30,
-        y = VIRTUAL_HEIGHT - 30,
+        x = room.x + room.width - 30,
+        y = room.y + room.height - 30,
         stateStack = {'idle'},
         name = "Granny",
         spriteRow = 1})
     
     local player = character:new({
-        x = 10,
-        y = 10,
+        x = room.x + 5,
+        y = room.y + 5,
         stateStack = {'idle'},
         stateTransitions = {
             idle = { moveRight = { velocityX = 15 },
@@ -53,9 +53,18 @@ function love.load()
         },
         name = "Boy",
         spriteRow = 2,
-        inputs = { keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'},
-                   keyRelease = { right = 'idle', left = 'idle', up ='idle', down = 'idle'}
-                  }
+        inputs = { 
+            keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'},
+            keyRelease = { right = 'idle', left = 'idle', up ='idle', down = 'idle'}
+        },
+        animation = {
+            interval = 0.2,
+            states = {
+                idle = { frames = { 1 } },
+                moveRight = { frames = { 2 } },
+                moveLeft = { frames = { 2 }, isFlipped = true}
+            }
+        }
     })
 
 
@@ -78,6 +87,7 @@ function love.keypressed(k)
 
 function love.update(dt)
     movement.move(world.entities, dt)
+    world:update(dt)
 end
 
 function love.draw()

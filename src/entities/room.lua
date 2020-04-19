@@ -1,8 +1,8 @@
 local room = {
-    x = 1,
-    y = 1,
-    height = VIRTUAL_HEIGHT-1,
-    width = VIRTUAL_WIDTH - 1
+    x = VIRTUAL_WIDTH / 2 - (VIRTUAL_WIDTH / 4),
+    y = VIRTUAL_HEIGHT / 2 - (VIRTUAL_HEIGHT / 4),
+    height = VIRTUAL_HEIGHT / 2,
+    width = VIRTUAL_WIDTH / 2
 }
 
 function room:new()
@@ -13,7 +13,9 @@ function room:new()
 end
 
 function doorStencil()
-    love.graphics.line(room.width/2 - 15, room.height, room.width/2 + 15, room.height)
+    love.graphics.line(
+        room.x + room.width/2 - 15, room.height + room.y, 
+        room.x + room.width/2 + 15, room.height + room.y)
 end
 
 function room:render()
