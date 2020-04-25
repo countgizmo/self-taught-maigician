@@ -29,49 +29,19 @@ function love.load()
         highdpi = true
     })
 
-    local room1 = room:new({name = "room"})
-    local grandma = character:new({
-        x = room.x + room.width - 30,
-        y = room.y + room.height - 30,
-        stateStack = {'idle'},
-        name = "Granny",
-        spriteRow = 1})
-    
-    local player = character:new({
-        x = room.x + 5,
-        y = room.y + 5,
-        stateStack = {'idle'},
-        stateTransitions = {
-            idle = { moveRight = { velocityX = 15 },
-                     moveLeft = { velocityX = -15 },
-                     moveUp = { velocityY = -15 },
-                     moveDown = { velocityY = 15 }},
-            moveRight = { idle = { velocityX = 0 }},
-            moveLeft = { idle = { velocityX = 0 }},
-            moveUp = { idle = {velocityY = 0 }},
-            moveDown = { idle = {velocityY = 0 }}
-        },
-        name = "Boy",
-        spriteRow = 2,
-        inputs = { 
-            keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'},
-            keyRelease = { right = 'idle', left = 'idle', up ='idle', down = 'idle'}
-        },
-        animation = {
-            interval = 0.2,
-            states = {
-                idle = { frames = { 1 } },
-                moveRight = { frames = { 2 } },
-                moveLeft = { frames = { 2 }, isFlipped = true}
-            }
-        }
-    })
+    world.level = level0
+end
 
-
-    world.entities = {room1, player, grandma}
+function love.conf(t)
+    t.console = true
 end
 
 function love.keypressed(k)
+     --Debug
+    if k == "lctrl" then
+        debug.debug()
+    end
+
     if k == 'escape' then
        love.event.quit()
     elseif k == 'f' then
@@ -86,7 +56,6 @@ function love.keypressed(k)
  end
 
 function love.update(dt)
-    movement.move(world.entities, dt)
     world:update(dt)
 end
 
@@ -95,9 +64,8 @@ function love.draw()
   
     love.graphics.clear(119/255, 136/255, 153/255)
 
-    rendering.renderall(world.entities)
-    
+    world:render()    
     -- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
-
+    
     push:finish()
 end

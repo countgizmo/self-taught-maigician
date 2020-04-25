@@ -12,3 +12,7 @@ statemachine = require('src/systems/state_machine')
 rendering = require('src/systems/rendering')
 input = require('src/systems/input')
 animation = require('src/systems/animation')
+trigger = require('src/systems/trigger')
+
+-- Levels
+level0 = require('src/levels/level0')

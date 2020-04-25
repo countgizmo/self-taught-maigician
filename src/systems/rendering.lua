@@ -1,5 +1,5 @@
 return {
-    renderall = function(entities)
+    render = function(entity)
         isAnimated = function(entity)
             return entity.stateStack
             and entity.stateStack[#entity.stateStack]
@@ -42,33 +42,31 @@ return {
             and entity.quads
         end
 
-        for _, entity in ipairs(entities) do
-            if isRenderable(entity) then
-                local frame = getFrame(entity)
+        if isRenderable(entity) then
+            local frame = getFrame(entity)
 
-                if isFlipped(entity) then
-                    love.graphics.draw(
-                        entity.spriteSheet,
-                        entity.quads[frame],
-                        entity.x,
-                        entity.y,
-                        0,
-                        -1,
-                        1,
-                        entity.width)
-                else 
-                    love.graphics.draw(
-                        entity.spriteSheet, 
-                        entity.quads[frame],
-                        entity.x,
-                        entity.y)
-                end
-                
-                -- debug
-                love.graphics.print(entity.stateStack[#entity.stateStack], entity.x, entity.y + entity.height)
-            elseif entity.render then
-                entity:render()
+            if isFlipped(entity) then
+                love.graphics.draw(
+                    entity.spriteSheet,
+                    entity.quads[frame],
+                    entity.x,
+                    entity.y,
+                    0,
+                    -1,
+                    1,
+                    entity.width)
+            else 
+                love.graphics.draw(
+                    entity.spriteSheet, 
+                    entity.quads[frame],
+                    entity.x,
+                    entity.y)
             end
+            
+            -- debug
+            love.graphics.print(entity.stateStack[#entity.stateStack], entity.x, entity.y + entity.height)
+        elseif entity.render then
+            entity:render()
         end
     end
 }
