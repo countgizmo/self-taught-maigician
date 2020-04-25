@@ -28,6 +28,7 @@ end
 function world:render()
     for _, entity in pairs(self.level.entities) do
         rendering.render(entity)
+        speaking.speak(entity, entity.speech)
     end
 end
 

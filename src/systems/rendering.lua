@@ -64,7 +64,7 @@ return {
             end
             
             -- debug
-            love.graphics.print(entity.stateStack[#entity.stateStack], entity.x, entity.y + entity.height)
+            -- love.graphics.print(entity.stateStack[#entity.stateStack], entity.x, entity.y + entity.height)
         elseif entity.render then
             entity:render()
         end

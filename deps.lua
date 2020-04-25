@@ -13,6 +13,7 @@ rendering = require('src/systems/rendering')
 input = require('src/systems/input')
 animation = require('src/systems/animation')
 trigger = require('src/systems/trigger')
+speaking = require('src/systems/speaking')
 
 -- Levels
 level0 = require('src/levels/level0')

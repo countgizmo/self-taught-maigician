@@ -47,10 +47,10 @@ level.triggers = {
             function(entity) return entity.y > room.y + room.height - 30 end 
         },
         ontrigger = function()
-            level.entities[3].y = 14
+            level.entities[3].speech = "Hello!"
         end,
         offtrigger = function()
-            level.entities[3].y = granyOriginalY
+            level.entities[3].speech = nil
         end
     }
 }
