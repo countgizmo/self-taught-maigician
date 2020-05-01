@@ -11,21 +11,32 @@ local player = character:new({
     x = room.x + 5,
     y = room.y + 5,
     stateStack = {'idle'},
-    stateTransitions = {
-        idle = { moveRight = { velocityX = 25 },
-                    moveLeft = { velocityX = -25 },
-                    moveUp = { velocityY = -25 },
-                    moveDown = { velocityY = 25 }},
-        moveRight = { idle = { velocityX = 0 }},
-        moveLeft = { idle = { velocityX = 0 }},
-        moveUp = { idle = {velocityY = 0 }},
-        moveDown = { idle = {velocityY = 0 }}
+    states = {
+        idle = {
+            velocityX = 0,
+            velocityY = 0
+        },
+        moveRight = {
+            velocityX = 25,
+            velocityY = 0
+        },
+        moveLeft = {
+            velocityX = -25,
+            velocityY = 0
+        },
+        moveDown = {
+            velocityX = 0,
+            velocityY = 25
+        },
+        moveUp = {
+            velocityX = 0,
+            velocityY = -25
+        }
     },
     name = "Boy",
     spriteRow = 2,
     inputs = { 
-        keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'},
-        keyRelease = { right = 'idle', left = 'idle', up ='idle', down = 'idle'}
+        keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'}    
     },
     animation = {
         interval = 0.2,

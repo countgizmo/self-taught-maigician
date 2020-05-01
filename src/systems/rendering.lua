@@ -64,7 +64,11 @@ return {
             end
             
             -- debug
-            -- love.graphics.print(entity.stateStack[#entity.stateStack], entity.x, entity.y + entity.height)
+            love.graphics.print((entity.velocityX or 0) .. ' : ' .. (entity.velocityY or 0), entity.x+20, entity.y + entity.height)
+            for i,s in ipairs(entity.stateStack) do
+                love.graphics.print(s, entity.x, entity.y + entity.height * i)
+                
+            end
         elseif entity.render then
             entity:render()
         end
