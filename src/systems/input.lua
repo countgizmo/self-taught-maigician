@@ -9,9 +9,11 @@ return {
     keyreleased = function(object, key)
         if object.stateStack then
             local fromState = object.stateStack[#object.stateStack]
+            
             if #object.stateStack > 1 then
                 table.remove(object.stateStack)
             end
+
             local toState = object.stateStack[#object.stateStack] or 'idle'
             statemachine.changestate(object, fromState, toState)
         end

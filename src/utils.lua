@@ -1,4 +1,4 @@
-function generateQuads(spriteSheet, width, height, row, total, offsetX, offsetY)
+function generateQuads(spriteSheet, width, height, row, total)
     local quads = {}
 
     for i=0,total-1 do
@@ -11,4 +11,12 @@ function generateQuads(spriteSheet, width, height, row, total, offsetX, offsetY)
     end
 
     return quads
+end
+
+function isAnimated(entity)
+    return entity.stateStack
+    and entity.stateStack[#entity.stateStack]
+    and entity.animation
+    and entity.animation.states
+    and entity.animation.states[entity.stateStack[#entity.stateStack]]
 end

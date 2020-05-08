@@ -6,7 +6,6 @@ local character = {
     width = 16,
     height = 16,
     currentFrame = 1,
-    spriteSheet = love.graphics.newImage('resources/img/dummy-top-down.png'),
     quads = {},
 }
 
@@ -15,7 +14,7 @@ function character:new(o)
     setmetatable(o, self)
     self.__index = self
 
-    o.quads = generateQuads(o.spriteSheet, o.width, o.height, o.spriteRow, 3)
+    o.quads = generateQuads(o.spriteSheet, o.width, o.height, o.spriteRow, 16)
     return o
 end
 

@@ -65,7 +65,7 @@ function love.draw()
     love.graphics.clear(119/255, 136/255, 153/255)
 
     world:render()    
-    -- love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+    love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
     
     push:finish()
 end

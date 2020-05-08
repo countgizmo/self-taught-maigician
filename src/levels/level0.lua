@@ -1,11 +1,15 @@
 local room = room:new({name = "room"})
-local granyOriginalY = room.y + room.height - 30
+
 local grandma = character:new({
-    x = room.x + room.width - 30,
-    y = room.y + room.height - 30,
+    x = room.x + room.width - 40,
+    y = room.y + room.height - 40,
     stateStack = {'idle'},
     name = "Granny",
-    spriteRow = 1})
+    width = 16,
+    height = 20,
+    spriteRow = 1,
+    spriteSheet = love.graphics.newImage('resources/img/grandma-sprite.png'),
+})
     
 local player = character:new({
     x = room.x + 5,
@@ -34,7 +38,8 @@ local player = character:new({
         }
     },
     name = "Boy",
-    spriteRow = 2,
+    spriteSheet = love.graphics.newImage('resources/img/boy-sprite.png'),
+    spriteRow = 1,
     inputs = { 
         keyPress = { right = 'moveRight', left = 'moveLeft', up = 'moveUp', down = 'moveDown'}    
     },
@@ -42,8 +47,10 @@ local player = character:new({
         interval = 0.2,
         states = {
             idle = { frames = { 1 } },
-            moveRight = { frames = { 2 } },
-            moveLeft = { frames = { 2 }, isFlipped = true}
+            moveRight = { frames = { 9, 10, 11, 12 } },
+            moveLeft = { frames = { 13, 14, 15, 16 } },
+            moveDown = { frames = { 2, 3, 4, 1 }},
+            moveUp = { frames = { 6, 7, 8, 5 }}
         }
     }
 })
@@ -55,7 +62,7 @@ level.triggers = {
     { 
         source = 2,
         conditions = { 
-            function(entity) return entity.y > room.y + room.height - 30 end 
+            function(entity) return entity.y > grandma.y end 
         },
         ontrigger = function()
             level.entities[3].speech = "Hello!"
